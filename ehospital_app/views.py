@@ -6,6 +6,10 @@ from django.contrib.auth.decorators import login_required
 from .models import Patient, Appointment, MedicalHistory, Billing, Doctor, HealthEducationResource
 from .forms import PatientRegistrationForm, AppointmentForm, MedicalHistoryForm, DoctorForm, BillingForm, \
     HealthEducationResourceForm
+from django.urls import reverse
+
+import stripe
+from django.conf import settings
 
 
 # Create your views here.
@@ -169,4 +173,40 @@ def update_health_educational_resource(request,resource_id):
 def resource_details(request, resource_id):
     resources = HealthEducationResource.objects.get(id=resource_id)
     return render(request, 'resource_details.html', {'resources': resources})
+
+
+def create_checkout_session(request, billing_id):
+    billing = Billing.objects.get(id=billing_id)
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+
+    if request.method == 'POST':
+        checkout_session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[{
+                'price_data': {
+                    'currency': 'usd',
+                    'unit_amount': int(billing.amount * 100),
+                    'product_data': {
+                        'name': billing.amount,
+                    },
+                },
+                'quantity': 1,
+            }],
+            mode='payment',
+            success_url=request.build_absolute_uri(reverse('payment_success', args=[billing.id])),
+            cancel_url=request.build_absolute_uri(reverse('payment_cancel')),
+        )
+
+        return redirect(checkout_session.url, code=303)
+
+    return render(request, 'checkout.html', {'billing': billing})
+
+def payment_success(request, billing_id):
+    billing = Billing.objects.get(id=billing_id)
+    billing.is_paid = True
+    billing.save()
+    return render(request, 'success.html', {'billing': billing})
+
+def payment_cancel(request):
+    return render(request, 'cancel.html')
 
