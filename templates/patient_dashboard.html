@@ -225,6 +225,7 @@
         <th scope="col">Billing Date</th>
         <th scope="col">Status</th>
          <th scope="col">Update</th>
+        <th scope="col">Pay</th>
     </tr>
   </thead>
   <tbody>
@@ -236,6 +237,11 @@
       <td>{{ billing.billing_date }}</td>
         <td>{{ billing.status }}</td>
           <td><a href="{% url 'update_billing' billing.id %}"  class="btn btn-success">Update</a></td>
+         <td>
+            <form action="{% url 'create_checkout_session' billing.id %}" method="post">
+    {% csrf_token %}
+    <button id="checkout-button" type="submit">Pay {{ billing.amount }}</button>
+</form></td>
 
     </tr>
  {% endfor %}
