@@ -1,0 +1,48 @@
+
+
+
+ {% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+
+
+ <div style="background-color:lightblue;  padding: 50px 0px;">
+
+
+ <div class="card" style="width : 30%;  padding: 30px; margin-left: 500px; ">
+  <div class="card-header">
+      <h3>Patient Medical Details</h3>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Patient Name</h5>
+    <p class="card-text">{{ medical_history.patient }}</p>
+
+      <h5 class="card-title">Diagnosis</h5>
+    <p class="card-text">{{ medical_history.diagnosis }}</p>
+
+      <h5 class="card-title">Medications</h5>
+    <p class="card-text">{{ medical_history.medications }}</p>
+
+      <h5 class="card-title">Allergies</h5>
+    <p class="card-text">{{ medical_history.allergies }}</p>
+
+      <h5 class="card-title">Treatment History</h5>
+    <p class="card-text">{{ medical_history.treatment_history }}</p>
+      <h5 class="card-title">Record Date</h5>
+    <p class="card-text">{{ medical_history.record_date }}</p>
+
+
+
+  </div>
+</div>
+     </div>
+
+
+
+
+
+
+
+ {% endblock %}
+

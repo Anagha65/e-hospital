@@ -1,0 +1,20 @@
+
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+
+
+
+ <section id="hero" style="background-image: url('{% static 'images/medical-technology-science-background-vector-blue-with-blank-space_53876-117739.avif' %}')">
+        <div class="container">
+
+             <h1>Welcome to  E-Hospital</h1>
+            <h2>Your Health is Our Priority</h2>
+            <p>We are dedicated to providing high-quality healthcare services.</p>
+            <a href="{% url 'patient_registration' %}" class="btn btn-primary">Register</a>
+        </div>
+    </section>
+
+
+{% endblock %}

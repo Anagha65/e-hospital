@@ -1,0 +1,47 @@
+
+
+
+ {% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+
+
+ <div style="background-color:lightblue;  padding: 50px 0px;">
+
+
+ <div class="card" style="width : 30%;  padding: 30px; margin-left: 500px; ">
+  <div class="card-header">
+      <h3>User Details</h3>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Username:</h5> {{ users.username }}
+
+
+      <h5 class="card-title">First Name: </h5>{{ users.first_name }}
+    <p class="card-text"></p>
+
+      <h5 class="card-title">Last Name: </h5> {{ users.last_name }}
+    <p class="card-text"></p>
+
+      <h5 class="card-title">Email</h5>
+    <p class="card-text">{{ users.email }}</p>
+
+
+
+
+
+
+
+  </div>
+</div>
+     </div>
+
+
+
+
+
+
+
+ {% endblock %}
+

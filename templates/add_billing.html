@@ -1,0 +1,17 @@
+ {% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+
+ <h2 class="text-center">Add Billing</h2>
+ <div class="container shadow" style="width : 30%; margin-bottom : 50px; padding: 30px">
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+
+  {% endblock %}

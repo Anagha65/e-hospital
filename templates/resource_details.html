@@ -1,0 +1,39 @@
+
+
+
+ {% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+
+
+ <div style="background-color:lightblue;  padding: 50px 0px;">
+
+
+ <div class="card" style="width : 60%;  padding: 30px; margin-left: 300px; ">
+  <div class="card-header">
+      <h3 style="color:darkblue;">{{ resources.title }}</h3>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ resources.published_date }}</h5>
+       <img src="{{ resources.image.url }}" alt=".." class="card-img-top"><br><br>
+    <p class="card-text">{{ resources.description }}</p>
+
+     <p><a href="{{ resources.link }}" class="btn btn-warning">Link</a></p><br>
+
+
+
+
+
+  </div>
+</div>
+     </div>
+
+
+
+
+
+
+
+ {% endblock %}
+
